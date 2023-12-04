@@ -14,7 +14,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_185256) do
   create_table "links", force: :cascade do |t|
     t.string "url", null: false
     t.string "slug", null: false
-    t.string "link_type", null: false
+    t.string "link_category", null: false
     t.string "password"
     t.datetime "expiration_date"
     t.integer "access_count"

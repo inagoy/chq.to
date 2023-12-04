@@ -3,7 +3,7 @@
 one:
   url: MyString
   slug: MyString
-  link_type: MyString
+  link_category: MyString
   password: MyString
   expiration_date: 2023-12-04 15:37:54
   access_count: 1
@@ -11,7 +11,7 @@ one:
 two:
   url: MyString
   slug: MyString
-  link_type: MyString
+  link_category: MyString
   password: MyString
   expiration_date: 2023-12-04 15:37:54
   access_count: 1
