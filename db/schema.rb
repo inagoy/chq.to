@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_30_133832) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_04_185256) do
+  create_table "links", force: :cascade do |t|
+    t.string "url", null: false
+    t.string "slug", null: false
+    t.string "link_type", null: false
+    t.string "password"
+    t.datetime "expiration_date"
+    t.integer "access_count"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_links_on_slug", unique: true
+    t.index ["url"], name: "index_links_on_url", unique: true
+    t.index ["user_id"], name: "index_links_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -26,4 +41,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_30_133832) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "visits", force: :cascade do |t|
+    t.string "ip"
+    t.datetime "date"
+    t.integer "link_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ip", "date"], name: "index_visits_on_ip_and_date", unique: true
+    t.index ["link_id"], name: "index_visits_on_link_id"
+  end
+
+  add_foreign_key "links", "users"
+  add_foreign_key "visits", "links"
 end

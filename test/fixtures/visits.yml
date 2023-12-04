@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ip: MyString
+  date: 2023-12-04 15:52:56
+  link: one
+
+two:
+  ip: MyString
+  date: 2023-12-04 15:52:56
+  link: two
