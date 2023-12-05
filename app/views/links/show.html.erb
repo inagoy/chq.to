@@ -1,10 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @link %>
+<div class="card p-3">
+  <%= render @link %>
+  <div class="text-center mt-2">
+    <div class="btn-group btn-group-sm">
 
-<div>
-  <%= link_to "Edit this link", edit_link_path(@link) %> |
-  <%= link_to "Back to links", links_path %>
-
-  <%= button_to "Destroy this link", @link, method: :delete %>
+        <%= link_to "Edit this link", edit_link_path(@link), class:"btn btn-light" %>
+        <%= link_to "Back to links", links_path, class:"btn btn-light" %>
+    </div>
+    <div class="mt-3">
+      <%= button_to "Destroy this link", @link, method: :delete, class:"btn btn-light btn-sm" %>
+    </div>
+  </div>
 </div>

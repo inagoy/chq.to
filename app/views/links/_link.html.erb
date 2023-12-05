@@ -1,9 +1,10 @@
 <div id="<%= dom_id link %>">
     <div class="d-flex w-100 justify-content-between">
       <h5>Url Original: <%= link.url %></h5>
-      <h5>Url Chqta: <%= link.slug %></h5>
+      <h5>
+        Url Chqta: <a href="<%= request.base_url %>/l/<%= link.slug %>"> <%= request.base_url %>/l/<%= link.slug %></a>
+      </h5>
       <p><%= link.time_ago %></p>
     </div>
     <p class="mb-1"><%= link.link_category.humanize %></p>
-    
 </div>

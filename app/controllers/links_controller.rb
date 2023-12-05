@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[ show edit update destroy ]
 
   # GET /links or /links.json
   def index
@@ -59,11 +59,32 @@ class LinksController < ApplicationController
   end
 
   def access
-    @link = Link.find_by(slug: params[:slug])
-    if @link.nil?
+    @slug = params[:slug]
+    link = Link.find_by(slug: @slug)
+    if link.nil?
       render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
     else
-      redirect_to @link.url, allow_other_host: true
+      type = link.link_category
+      if type == "regular" || (type == "ephemeral" && link.visits.count > 0)
+        link.visits.create(ip: request.remote_ip, date: Time.now)
+        @url = link.url
+        render 'links/redirection'
+      elsif type == "exclusive"
+        render 'links/insert_password'
+      end
+    end
+  end
+
+  def validate_password
+    @slug = params[:slug]
+    password = params[:password]
+    link = Link.find_by(slug: @slug)
+
+    if !link.nil? && link.authenticate(password)
+      link.visits.create(ip: request.remote_ip, date: Time.now)
+      redirect_to link.url, allow_other_host: true
+    else
+      redirect_to access_path(slug: @slug), notice: "Wrong password"
     end
   end
 

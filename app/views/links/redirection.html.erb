@@ -1,0 +1,12 @@
+<p>You'll be redirected to...</p>
+<a href="<%= @url %>" id="myLink"><%= @url %></a>
+
+<script>
+  // Get the anchor element
+  var link = document.getElementById("myLink");
+
+  // Trigger the click event after 3 seconds
+  setTimeout(function() {
+    link.click();
+  }, 3000); // 3000 milliseconds = 3 seconds
+</script>

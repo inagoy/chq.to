@@ -41,6 +41,11 @@ class Link < ApplicationRecord
     end
   end
 
+  def authenticate(password)
+    return true if self.password.blank?
+    self.password == password
+  end
+
   private
 
   def generate_slug
