@@ -16,11 +16,22 @@
     <%= form.text_field :url %>
   </div>
 
-  <div class="field">
-    <%= form.label :link_category %>
-    <%= form.select :link_category, Link.link_categories.values %>
-  </div>
+  <div data-controller="select" data-action="change->select#toggleInput">
+    <div class="field">
+      <%= form.label :link_category %>
+      <%= form.select :link_category, Link.link_categories.values %>
+    </div>
 
+    <div id="password" class="field hidden" data-select-target="passwordField">
+      <%= form.label :password %>
+      <%= form.text_field :password %>
+    </div>
+
+    <div id="expiration_date" class="field hidden" data-select-target="expirationDateField">
+      <%= form.label :expiration_date %>
+      <%= form.datetime_field :expiration_date %>
+    </div>
+  </div>
   <div>
     <%= form.submit %>
   </div>

@@ -58,6 +58,15 @@ class LinksController < ApplicationController
     end
   end
 
+  def access
+    @link = Link.find_by(slug: params[:slug])
+    if @link.nil?
+      render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
+    else
+      redirect_to @link.url, allow_other_host: true
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_link

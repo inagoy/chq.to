@@ -9,7 +9,12 @@ class Link < ApplicationRecord
 
   validates_presence_of :url, :link_category
   validates_presence_of :password, if: -> { link_category == 'exclusive' }
-  validates_presence_of :expiration_date, if: -> { link_category == 'temporal' }
+
+  with_options if: -> { link_category == 'temporal' } do
+    validates_presence_of :expiration_date
+    validate :expiration_date_in_future
+  end
+
   validates_uniqueness_of :url
 
   validates :url, format: { with: URI.regexp }
@@ -19,7 +24,8 @@ class Link < ApplicationRecord
   belongs_to :user
   has_many :visits, dependent: :destroy
 
-  before_create :generate_slug
+  after_create :generate_slug
+
 
   def time_ago
     seconds_ago = Time.zone.now - created_at
@@ -38,7 +44,13 @@ class Link < ApplicationRecord
   private
 
   def generate_slug
-    self.slug = Digest::MD5.hexdigest(self.url)
+    self.slug = LinksHelper.encode(self.id)
+    self.save
   end
 
+  def expiration_date_in_future
+    if expiration_date <= Time.current
+      errors.add(:expiration_date, "Must be in the future")
+    end
+  end
 end
