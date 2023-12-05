@@ -11,28 +11,31 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :url %>
-    <%= form.text_field :url %>
+  <div class="field mb-3">
+    <%= form.label :url, class: "form-label" %>
+    <%= form.text_field :url, class: "form-control" %>
   </div>
 
   <div data-controller="select" data-action="change->select#toggleInput">
-    <div class="field">
-      <%= form.label :link_category %>
-      <%= form.select :link_category, Link.link_categories.values %>
+
+    <div class="field mb-3">
+      <%= form.label :link_category, class: "form-label" %>
+      <%= form.select :link_category, Link.link_categories.values, {}, class:'form-select' %>
     </div>
 
-    <div id="password" class="field hidden" data-select-target="passwordField">
-      <%= form.label :password %>
-      <%= form.text_field :password %>
+    <div id="password" class="field mb-3 hidden" data-select-target="passwordField">
+      <%= form.label :password, class: "form-label" %>
+      <%= form.text_field :password, class: "form-control" %>
     </div>
 
-    <div id="expiration_date" class="field hidden" data-select-target="expirationDateField">
-      <%= form.label :expiration_date %>
-      <%= form.datetime_field :expiration_date %>
+    <div id="expiration_date" class="field mb-3 hidden" data-select-target="expirationDateField">
+      <%= form.label :expiration_date, class: "form-label" %>
+      <%= form.datetime_field :expiration_date, class: "form-control" %>
     </div>
+  
   </div>
+
   <div>
-    <%= form.submit %>
+    <%= form.submit "Create Link", class: "btn btn-primary" %>
   </div>
 <% end %>
