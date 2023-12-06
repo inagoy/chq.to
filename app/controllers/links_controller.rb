@@ -65,12 +65,14 @@ class LinksController < ApplicationController
       render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
     else
       type = link.link_category
-      if type == "regular" || (type == "ephemeral" && link.visits.count > 0)
+      if type == "regular" || (type == "ephemeral" && link.visits.count == 0) || (type == "temporal" && link.in_time?)
         link.visits.create(ip: request.remote_ip, date: Time.now)
         @url = link.url
         render 'links/redirection'
       elsif type == "exclusive"
         render 'links/insert_password'
+      else
+        render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
       end
     end
   end
@@ -80,7 +82,7 @@ class LinksController < ApplicationController
     password = params[:password]
     link = Link.find_by(slug: @slug)
 
-    if !link.nil? && link.authenticate(password)
+    if !link.nil? && link.authenticated?(password)
       link.visits.create(ip: request.remote_ip, date: Time.now)
       redirect_to link.url, allow_other_host: true
     else

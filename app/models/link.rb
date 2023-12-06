@@ -26,6 +26,14 @@ class Link < ApplicationRecord
 
   after_create :generate_slug
 
+  def authenticated?(password)
+    return true if self.password.blank?
+    self.password == password
+  end
+
+  def in_time?
+    Time.zone.now < expiration_date
+  end
 
   def time_ago
     seconds_ago = Time.zone.now - created_at
@@ -34,16 +42,11 @@ class Link < ApplicationRecord
     days_ago = (hours_ago / 24).to_i
 
     case
-    when minutes_ago < 1 then "Hace instantes"
-    when hours_ago < 1 then "Hace #{minutes_ago} minutos"
-    when days_ago < 1 then "Hace #{hours_ago} horas"
-    else "Hace #{days_ago} días"
+      when minutes_ago < 1 then "Hace instantes"
+      when hours_ago < 1 then "Hace #{minutes_ago} minutos"
+      when days_ago < 1 then "Hace #{hours_ago} horas"
+      else "Hace #{days_ago} días"
     end
-  end
-
-  def authenticate(password)
-    return true if self.password.blank?
-    self.password == password
   end
 
   private
