@@ -6,7 +6,7 @@ class CreateLinks < ActiveRecord::Migration[7.1]
       t.string :link_category, null: false
       t.string :password
       t.datetime :expiration_date
-      t.integer :access_count
+      t.string :name
       t.references :user, null: false, foreign_key: true
 
       t.timestamps
