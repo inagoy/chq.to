@@ -1,0 +1,3 @@
+class RegularLink < Link
+
+end

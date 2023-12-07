@@ -23,7 +23,6 @@ class LinksController < ApplicationController
   # POST /links or /links.json
   def create
     @link = current_user.links.build(link_params)
-
     respond_to do |format|
       if @link.save
         format.html { redirect_to link_url(@link), notice: "Link was successfully created." }
@@ -98,6 +97,6 @@ class LinksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def link_params
-      params.require(:link).permit(:url, :link_category, :password, :expiration_date)
+      params.require(:link).permit(:url, :type, :password, :expiration_date)
     end
 end

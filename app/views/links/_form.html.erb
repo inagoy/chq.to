@@ -19,8 +19,8 @@
   <div data-controller="select" data-action="change->select#toggleInput">
 
     <div class="field mb-3">
-      <%= form.label :link_category, class: "form-label" %>
-      <%= form.select :link_category, Link.link_categories.values, {}, class:'form-select' %>
+      <%= form.label :type, class: "form-label" %>
+      <%= form.select :type, ['RegularLink', 'EphemeralLink', 'TemporaryLink', 'ExclusiveLink'], {}, class:'form-select' %>
     </div>
 
     <div id="password" class="field mb-3 hidden" data-select-target="passwordField">
