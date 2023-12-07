@@ -28,7 +28,7 @@ class LinksController < ApplicationController
         format.html { redirect_to link_url(@link), notice: "Link was successfully created." }
         format.json { render :show, status: :created, location: @link }
       else
-        @link = current_user.links.build(link_params.except(:type))
+        @link = @link.becomes(Link)
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @link.errors, status: :unprocessable_entity }
       end
