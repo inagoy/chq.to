@@ -2,7 +2,7 @@ class Link < ApplicationRecord
 
 
   validates_presence_of :url, :type
-  validates_uniqueness_of :url
+  validates_uniqueness_of :url, scope: :user_id
   validates :url, format: { with: URI.regexp }
 
   belongs_to :user
@@ -24,9 +24,14 @@ class Link < ApplicationRecord
     end
   end
 
+
   private
 
   def generate_slug
-    self.slug = Digest::MD5.hexdigest(url)
+    self.slug = loop do
+      generated_slug = Digest::MD5.hexdigest(url)[0..5]
+      break generated_slug unless Link.exists?(slug: generated_slug)
+    end
   end
+
 end

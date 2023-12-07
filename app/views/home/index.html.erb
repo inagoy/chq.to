@@ -3,6 +3,6 @@
 <% unless user_signed_in? %>
     <h1> Welcome to Chqto </h1>
 <% else %>
-    <h2> Hello <%= current_user.first_name %> <%= current_user.last_name %> </h2>
+    <h2> Hello <%= current_user.username %></h2>
     <%= link_to "Create Link", new_link_path, class: "btn btn-light" %>
 <% end %>

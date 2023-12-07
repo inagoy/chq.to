@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_185256) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_links_on_slug", unique: true
-    t.index ["url"], name: "index_links_on_url", unique: true
+    t.index ["url"], name: "index_links_on_url"
     t.index ["user_id"], name: "index_links_on_user_id"
   end
 
@@ -30,8 +30,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_185256) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "username", default: "", null: false
-    t.string "first_name", default: "", null: false
-    t.string "last_name", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

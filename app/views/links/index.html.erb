@@ -5,7 +5,7 @@
 <div class="list-group mt-3" id="links">
   <% @links.each do |link| %>
     <div class="list-group-item">
-      <%= render link %>
+      <%= render link, link:link %>
       <p>
         <%= link_to "Show this link", link %>
       </p>

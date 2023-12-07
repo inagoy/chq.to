@@ -5,11 +5,11 @@ export default class extends Controller {
 
   toggleInput() {
     const selectedValue = this.element.querySelector("select").value
-
-    if (selectedValue === "Exclusive") {
+    
+    if (selectedValue === "ExclusiveLink") {
       this.passwordFieldTarget.classList.remove("hidden")
       this.expirationDateFieldTarget.classList.add("hidden")
-    } else if (selectedValue === "Temporal") {
+    } else if (selectedValue === "TemporaryLink") {
       this.passwordFieldTarget.classList.add("hidden")
       this.expirationDateFieldTarget.classList.remove("hidden")
     } else {

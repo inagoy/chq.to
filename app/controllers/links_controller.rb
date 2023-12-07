@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: %i[ index show edit update destroy ]
 
   # GET /links or /links.json
   def index
@@ -28,6 +28,7 @@ class LinksController < ApplicationController
         format.html { redirect_to link_url(@link), notice: "Link was successfully created." }
         format.json { render :show, status: :created, location: @link }
       else
+        @link = current_user.links.build(link_params.except(:type))
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @link.errors, status: :unprocessable_entity }
       end
@@ -90,16 +91,20 @@ class LinksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_link
-      @link = Link.find(params[:id])
-      puts "----------------------------------------------------"
-      puts @link
-      puts "----------------------------------------------------"
-    end
 
-    # Only allow a list of trusted parameters through.
-    def link_params
-      params.require(:link).permit(:url, :type, :password, :expiration_date)
+  def set_link
+    @link = Link.find_by(id: params[:id])
+    if @link && @link.user != current_user
+      flash[:error] = "No eres el autor de este link"
+      redirect_to root_path
+    elsif @link.nil?
+      render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
     end
+  end
+
+  # Only allow a list of trusted parameters through.
+  def link_params
+    params.require(:link).permit(:url, :type, :password, :expiration_date)
+  end
+
 end

@@ -20,7 +20,14 @@
 
     <div class="field mb-3">
       <%= form.label :type, class: "form-label" %>
-      <%= form.select :type, ['RegularLink', 'EphemeralLink', 'TemporaryLink', 'ExclusiveLink'], {}, class:'form-select' %>
+      <%= form.select :type, [
+          ['Regular','RegularLink'],
+          ['Ephemeral', 'EphemeralLink'], 
+          ['Temporary', 'TemporaryLink'], 
+          ['Exclusive', 'ExclusiveLink'], 
+        ], 
+        { include_blank: 'Select a category' }, 
+        class:'form-select' %>
     </div>
 
     <div id="password" class="field mb-3 hidden" data-select-target="passwordField">
