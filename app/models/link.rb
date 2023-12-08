@@ -24,6 +24,9 @@ class Link < ApplicationRecord
     end
   end
 
+  def accessible?
+    true
+  end
 
   private
 

@@ -2,8 +2,9 @@ class TemporaryLink < Link
   validates_presence_of :expiration_date
   validate :expiration_date_in_future
 
-  def in_time?
-    Time.zone.now < expiration_date
+
+  def accessible?
+    Time.zone.now < self.expiration_date
   end
 
   private
