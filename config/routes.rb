@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :exclusive_links, controller: 'links'
 
   devise_for :users
+  devise_scope :user do
+    get "profile" => "devise/sessions#show"
+  end
 
   root "home#index"
 

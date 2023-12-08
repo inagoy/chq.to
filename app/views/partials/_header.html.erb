@@ -21,6 +21,7 @@
       <% else %>
       <div class="d-flex gap-2">
         <%= button_to 'Log Out', destroy_user_session_path, :method => :delete, :class => 'btn btn-light' %>
+        <%= link_to 'Profile', profile_path, :class => 'btn btn-light' %>
       </div>
       <% end %>
     </div>
