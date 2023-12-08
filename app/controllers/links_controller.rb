@@ -18,6 +18,7 @@ class LinksController < ApplicationController
 
   # GET /links/1/edit
   def edit
+    @link = @link.becomes(Link)
   end
 
   # POST /links or /links.json
@@ -42,7 +43,8 @@ class LinksController < ApplicationController
         format.html { redirect_to link_url(@link), notice: "Link was successfully updated." }
         format.json { render :show, status: :ok, location: @link }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        @link = @link.becomes(Link)
+        format.html { render :edit , status: :unprocessable_entity }
         format.json { render json: @link.errors, status: :unprocessable_entity }
       end
     end

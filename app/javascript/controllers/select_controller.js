@@ -3,8 +3,12 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["passwordField", "expirationDateField"]
 
+  connect() {
+    this.toggleInput();
+  }
   toggleInput() {
     const selectedValue = this.element.querySelector("select").value
+    console.log(selectedValue)
     
     if (selectedValue === "ExclusiveLink") {
       this.passwordFieldTarget.classList.remove("hidden")
