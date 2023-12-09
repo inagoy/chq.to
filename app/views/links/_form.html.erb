@@ -5,12 +5,17 @@
 
       <ul>
         <% link.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li class="alert alert-danger small"><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
+  <div class="field mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>  
+  
   <div class="field mb-3">
     <%= form.label :url, class: "form-label" %>
     <%= form.text_field :url, class: "form-control" %>

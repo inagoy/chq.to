@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
-  before_action :set_link, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, only: %i[ index show edit update destroy ]
+  before_action :set_link, only: %i[ show edit update destroy visits]
+  before_action :authenticate_user!, only: %i[ index show edit update destroy visits]
 
   # GET /links or /links.json
   def index
@@ -91,12 +91,17 @@ class LinksController < ApplicationController
     end
   end
 
+  def visits
+    @visits = @link.visits
+
+  end
+
   private
 
   def set_link
     @link = Link.find_by(id: params[:id])
     if @link && @link.user != current_user
-      flash[:error] = "No eres el autor de este link"
+      flash[:alert] = "You are not the owner of this link"
       redirect_to root_path
     elsif @link.nil?
       render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
@@ -105,7 +110,7 @@ class LinksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def link_params
-    params.require(:link).permit(:url, :type, :password, :expiration_date)
+    params.require(:link).permit(:url, :name, :type, :password, :expiration_date)
   end
 
 end

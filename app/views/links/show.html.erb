@@ -5,6 +5,6 @@
 <div>
   <%= link_to "Edit this link", edit_link_path(@link) %> |
   <%= link_to "Back to links", links_path %>
-
+  <%= link_to "Show Visits", visits_path(@link) %>
   <%= button_to "Destroy this link", @link, method: :delete %>
 </div>

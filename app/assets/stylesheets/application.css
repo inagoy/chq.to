@@ -16,3 +16,19 @@
 .hidden {
   display: none;
 }
+
+.notice {
+  display: none;
+}
+.notice:not(:empty) {
+  display: block;
+  animation: hide 1s linear 5s 1 forwards;
+}
+@keyframes hide {
+  to {
+      opacity: 0;
+  }
+}
+ul {
+  list-style-type: none;
+}

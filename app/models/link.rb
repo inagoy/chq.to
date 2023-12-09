@@ -28,6 +28,10 @@ class Link < ApplicationRecord
     true
   end
 
+  def get_name
+    self.name? ? self.name : self.url
+  end
+
   private
 
   def generate_slug

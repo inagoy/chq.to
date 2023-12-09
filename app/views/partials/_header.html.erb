@@ -8,21 +8,30 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-      </ul>
       <% unless user_signed_in? %>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      </ul>
       <div class="d-flex gap-2">
         <%= link_to 'Sign Up', new_user_registration_path, :class => 'btn btn-light' %>
         <%= link_to 'Log In', new_user_session_path, :class => 'btn btn-light' %>
       </div>
       <% else %>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to 'Your Links', links_path, :class => 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Add Link', new_link_path, :class => 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Profile', profile_path, :class => 'nav-link' %>
+        </li>
+      </ul>
       <div class="d-flex gap-2">
         <%= button_to 'Log Out', destroy_user_session_path, :method => :delete, :class => 'btn btn-light' %>
-        <%= link_to 'Profile', profile_path, :class => 'btn btn-light' %>
+
       </div>
+      
       <% end %>
     </div>
   </div>

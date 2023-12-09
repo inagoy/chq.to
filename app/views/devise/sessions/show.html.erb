@@ -1,4 +1,4 @@
-<div class="card" style="width: 18rem;">
+<div class="card ">
   <div class="card-body">
     <h5 class="card-title"><%= current_user.username %></h5>
     
@@ -7,8 +7,8 @@
     <li class="list-group-item">Email: <%= current_user.email %></li>
     <li class="list-group-item">You Have <%= current_user.links.count %> Links</li>
   </ul>
-  <div class="card-body">
-    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, :class => 'btn btn-light' %>
-    <%= link_to 'Edit Profile', edit_user_registration_path, :class => 'btn btn-light' %>
+  <div class="card-body d-flex justify-content-center gap-2">
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, :class => 'btn btn-danger' %>
+    <%= link_to 'Edit Profile', edit_user_registration_path, :class => 'btn btn-secondary' %>
   </div>
 </div>
