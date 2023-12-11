@@ -2,9 +2,8 @@
 <div class="card p-3 shadow-sm w-75 mx-auto">
   <%= render "form", link: @link %>
   <br>
-
-  <div>
-    <%= link_to "Show this link", @link %> |
-    <%= link_to "Back to links", links_path %>
-  </div>
+</div>
+<div class="btn-group my-3">
+  <%= link_to "Show this link", @link, class:" btn btn-light shadow" %>
+  <%= link_to "Back to links", links_path, class: " btn btn-light shadow" %>
 </div>

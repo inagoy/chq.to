@@ -8,7 +8,7 @@
 -%>
 
   <%= paginator.render do -%>
-    <nav class="pagination mt-3 d-flex justify-content-center " role="navigation" aria-label="pager">
+    <nav class="pagination my-3 d-flex justify-content-center " role="navigation" aria-label="pager">
       <%= first_page_tag unless current_page.first? %>
       <%= prev_page_tag unless current_page.first? %>
       <% each_page do |page| -%>

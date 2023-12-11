@@ -53,6 +53,7 @@ Link.create!(
 )
 
 # Create visits for a link except for ephemeral
+=begin
 (1..3).each do |i|
   (1..100).each do |j|
     (1..rand(1..5)).each do
@@ -64,3 +65,4 @@ Link.create!(
     end
   end
 end
+=end
