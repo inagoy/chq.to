@@ -27,27 +27,26 @@ User.create!(
 
 # Create link
 Link.create!(
-  name: 'Example Link Regular',
+  name: 'Link Regular de Juan',
   url: 'https://www.google.com',
   type: 'RegularLink',
   user_id: 1,
 )
 Link.create!(
-  name: 'Example Link Exclusive',
+  name: 'Link Exclusive de Juan',
   url: 'https://www.github.com',
   type: 'ExclusiveLink',
   password: '123456',
   user_id: 1,
 )
 Link.create!(
-  name: 'Example Link Temporary',
+  name: 'Link Temporary de Juan',
   url: 'https://www.twitter.com',
   type: 'TemporaryLink',
   expiration_date: Time.zone.now + 1.minute,
   user_id: 1,
 )
 Link.create!(
-  name: 'Example Link Ephemeral',
   url: 'https://www.youtube.com',
   type: 'EphemeralLink',
   user_id: 1,

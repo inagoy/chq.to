@@ -25,7 +25,7 @@ class AccessController < ApplicationController
       link.visits.create(ip: request.remote_ip)
       redirect_to link.url, allow_other_host: true
     else
-      redirect_to access_path(slug: @slug), notice: "Wrong password"
+      redirect_to access_path(slug: @slug), alert: "Wrong password"
     end
   end
 end

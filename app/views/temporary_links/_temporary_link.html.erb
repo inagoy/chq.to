@@ -4,6 +4,6 @@
 </div>
 <div class="bg-light">
     <hr>
-    <div>This links expires: <%= link.expiration_date.strftime('%Y-%m-%d')%> at <%= link.expiration_date.strftime('%H:%M:%S')%></div>
+    <div>This links expires: <%= link.expiration_date.to_formatted_s(:day)%> at <%= link.expiration_date.to_formatted_s(:hour)%></div>
     <hr>
 </div>
