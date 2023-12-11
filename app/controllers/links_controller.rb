@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: %i[ show edit update destroy visits]
-  before_action :authenticate_user!, only: %i[ index show edit update destroy visits]
+  before_action :authenticate_user!
 
   # GET /links or /links.json
   def index
@@ -57,36 +57,6 @@ class LinksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to links_url, notice: "Link was successfully destroyed." }
       format.json { head :no_content }
-    end
-  end
-
-  def access
-    @slug = params[:slug]
-    link = Link.find_by(slug: @slug)
-    if !link.nil? && link.accessible?
-      if link.is_a?(ExclusiveLink)
-        render 'links/insert_password'
-      else
-        link.visits.create(ip: request.remote_ip)
-        redirect_to link.url, allow_other_host: true
-      end
-    elsif !link.nil? && link.is_a?(EphemeralLink)
-      render file: "#{Rails.root}/public/403.html", layout: false, status: :not_found
-    else
-      render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
-    end
-  end
-
-  def validate_password
-    @slug = params[:slug]
-    password = params[:password]
-    link = Link.find_by(slug: @slug)
-
-    if !link.nil? && link.authenticated?(password)
-      link.visits.create(ip: request.remote_ip)
-      redirect_to link.url, allow_other_host: true
-    else
-      redirect_to access_path(slug: @slug), notice: "Wrong password"
     end
   end
 

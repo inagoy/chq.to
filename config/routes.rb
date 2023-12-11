@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   resources :temporary_links, controller: 'links'
   resources :exclusive_links, controller: 'links'
   get "/links/:id/visits", to: "links#visits", as: "visits"
-  get "/l/:slug", to: "links#access", as: "access"
-  post '/l/protected/:slug', to: 'links#validate_password', as: 'validate_password'
+
+  get "/l/:slug", to: "access#access", as: "access"
+  post '/l/protected/:slug', to: 'access#validate_password', as: 'validate_password'
 
   devise_for :users
   devise_scope :user do

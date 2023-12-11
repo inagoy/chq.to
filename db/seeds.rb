@@ -33,12 +33,6 @@ Link.create!(
   user_id: 1,
 )
 Link.create!(
-  name: 'Example Link Ephemeral',
-  url: 'https://www.youtube.com',
-  type: 'EphemeralLink',
-  user_id: 1,
-)
-Link.create!(
   name: 'Example Link Exclusive',
   url: 'https://www.github.com',
   type: 'ExclusiveLink',
@@ -52,9 +46,15 @@ Link.create!(
   expiration_date: Time.zone.now + 1.minute,
   user_id: 1,
 )
+Link.create!(
+  name: 'Example Link Ephemeral',
+  url: 'https://www.youtube.com',
+  type: 'EphemeralLink',
+  user_id: 1,
+)
 
-# Create visits for a link
-(1..4).each do |i|
+# Create visits for a link except for ephemeral
+(1..3).each do |i|
   (1..100).each do |j|
     (1..rand(1..5)).each do
       Visit.create!(
