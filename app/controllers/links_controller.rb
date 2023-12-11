@@ -4,7 +4,7 @@ class LinksController < ApplicationController
 
   # GET /links or /links.json
   def index
-    @links = current_user.links
+    @links = current_user.links.page(params[:page]).per(3)
   end
 
   # GET /links/1 or /links/1.json
@@ -67,9 +67,8 @@ class LinksController < ApplicationController
       if link.is_a?(ExclusiveLink)
         render 'links/insert_password'
       else
-        link.visits.create(ip: request.remote_ip, date: Time.now)
-        @url = link.url
-        render 'links/redirection'
+        link.visits.create(ip: request.remote_ip)
+        redirect_to link.url, allow_other_host: true
       end
     elsif !link.nil? && link.is_a?(EphemeralLink)
       render file: "#{Rails.root}/public/403.html", layout: false, status: :not_found
@@ -84,7 +83,7 @@ class LinksController < ApplicationController
     link = Link.find_by(slug: @slug)
 
     if !link.nil? && link.authenticated?(password)
-      link.visits.create(ip: request.remote_ip, date: Time.now)
+      link.visits.create(ip: request.remote_ip)
       redirect_to link.url, allow_other_host: true
     else
       redirect_to access_path(slug: @slug), notice: "Wrong password"
@@ -92,7 +91,7 @@ class LinksController < ApplicationController
   end
 
   def visits
-    @visits = @link.visits
+    @visits = @link.visits.page(params[:page]).per(24)
     filter_visits
   end
 

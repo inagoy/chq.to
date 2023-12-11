@@ -1,10 +1,10 @@
 <h1>Editing link</h1>
+<div class="card p-3 shadow-sm w-75 mx-auto">
+  <%= render "form", link: @link %>
+  <br>
 
-<%= render "form", link: @link %>
-<div><%= @link.class %> </div>
-<br>
-
-<div>
-  <%= link_to "Show this link", @link %> |
-  <%= link_to "Back to links", links_path %>
+  <div>
+    <%= link_to "Show this link", @link %> |
+    <%= link_to "Back to links", links_path %>
+  </div>
 </div>
