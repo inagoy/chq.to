@@ -1,13 +1,16 @@
-<p style="color: green"><%= notice %></p>
 <div class="card shadow-sm p-3">
     <%= render @link, link: @link %>
 
-    <div class="w-50 mx-auto my-5"  role="group" >
+    <div class="w-50 mx-auto mt-5"  role="group" >
       <div class="btn-group mb-4">
         <%= link_to "Edit this link", edit_link_path(@link), class:"btn btn-outline-success"%>
         <%= link_to "Show Visits", visits_path(@link), class:"btn btn-outline-secondary"  %>
       </div>
-      <%= button_to "Destroy this link", @link, method: :delete, class:"mx-3 btn btn-danger"  %>
+      <%= button_to "Destroy this link", @link, method: :delete, class:"mx-3 btn btn-danger mb-2", data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }  %>
     </div>
-    <%= link_to "Back to links", links_path %>
+    <hr>
+    <h5> Link Visits </h5>
+    <%= line_chart @link.visits.group_by_day(:created_at).count %>
+    
 </div>
+<%= link_to "Back to links", links_path, class:" btn btn-light-sm my-3 shadow" %>

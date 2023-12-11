@@ -13,6 +13,7 @@
 
   <div class="field">
     <%= form.label :name, class: "form-label" %>
+    <span class="form-text text-muted"><i>(Optional)</i></span>
     <%= form.text_field :name, class: "form-control" %>
   </div>  
   
@@ -48,6 +49,6 @@
   </div>
 
   <div class="mt-3 py-3">
-    <%= form.submit "Save", class: "btn btn-light" %>
+    <%= form.submit "Save", class: "btn btn-success shadow" %>
   </div>
 <% end %>

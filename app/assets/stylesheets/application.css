@@ -22,7 +22,7 @@
 }
 .notice:not(:empty) {
   display: block;
-  animation: hide 1s linear 5s 1 forwards;
+  animation: hide 1s linear 3s 1 forwards;
 }
 @keyframes hide {
   to {

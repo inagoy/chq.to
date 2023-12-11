@@ -2,7 +2,10 @@
 
 <% unless user_signed_in? %>
     <h1> Welcome to Chqto </h1>
+    <hr>
+    <p class="lead"> The URL shortener App </p>
+    <img src="/chqto-logo-bg.png" alt="Chqto" class="rounded mx-auto d-block my-5 shadow">
 <% else %>
     <h2> Hello <%= current_user.username %></h2>
-    <%= link_to "Create Link", new_link_path, class: "btn btn-light" %>
+    <%= link_to "Create Link", new_link_path, class: "btn btn-light btn-lg shadow my-3" %>
 <% end %>

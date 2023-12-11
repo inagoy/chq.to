@@ -1,10 +1,10 @@
 class LinksController < ApplicationController
   before_action :set_link, only: %i[ show edit update destroy visits]
-  before_action :authenticate_user!, only: %i[ index show edit update destroy visits]
+  before_action :authenticate_user!
 
   # GET /links or /links.json
   def index
-    @links = current_user.links
+    @links = current_user.links.page(params[:page]).per(3)
   end
 
   # GET /links/1 or /links/1.json
@@ -60,40 +60,9 @@ class LinksController < ApplicationController
     end
   end
 
-  def access
-    @slug = params[:slug]
-    link = Link.find_by(slug: @slug)
-    if !link.nil? && link.accessible?
-      if link.is_a?(ExclusiveLink)
-        render 'links/insert_password'
-      else
-        link.visits.create(ip: request.remote_ip, date: Time.now)
-        @url = link.url
-        render 'links/redirection'
-      end
-    elsif !link.nil? && link.is_a?(EphemeralLink)
-      render file: "#{Rails.root}/public/403.html", layout: false, status: :not_found
-    else
-      render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
-    end
-  end
-
-  def validate_password
-    @slug = params[:slug]
-    password = params[:password]
-    link = Link.find_by(slug: @slug)
-
-    if !link.nil? && link.authenticated?(password)
-      link.visits.create(ip: request.remote_ip, date: Time.now)
-      redirect_to link.url, allow_other_host: true
-    else
-      redirect_to access_path(slug: @slug), notice: "Wrong password"
-    end
-  end
-
   def visits
-    @visits = @link.visits
-
+    @visits = @link.visits.page(params[:page]).per(24)
+    filter_visits
   end
 
   private
@@ -113,4 +82,9 @@ class LinksController < ApplicationController
     params.require(:link).permit(:url, :name, :type, :password, :expiration_date)
   end
 
+  def filter_visits
+    @visits = @visits.filter_by_ip(params[:ip]) if params[:ip].present?
+    @visits = @visits.filter_by_start_date(params[:start_date]) if params[:start_date].present?
+    @visits = @visits.filter_by_end_date(params[:end_date]) if params[:end_date].present?
+  end
 end

@@ -1,15 +1,15 @@
 <div id="<%= dom_id link %>" class="p-3">
-    <% if link.name !="" %>
-    <div class="bg-light">
-      <hr>
-      <div><%= link.name %></div>
-      <hr>
-    </div>
+    <% if link.name !="" && link.name!=nil %>
+      <div class="bg-light">
+        <hr>
+        <div><%= link.name %></div>
+        <hr>
+      </div>
     <% end %>
     <div class="d-flex w-100 justify-content-between">
       <h5>Url: <%= link.url %></h5>
       <h5>
-        Chqto: <a href="<%= request.base_url %>/l/<%= link.slug %>"> <%= request.base_url %>/l/<%= link.slug %></a>
+        Chqto: <a href="<%= request.base_url %>/l/<%= link.slug %>" target="_blank"> <%= request.base_url %>/l/<%= link.slug %></a>
       </h5>
       <p><%= link.time_ago %></p>
     </div>

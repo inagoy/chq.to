@@ -6,7 +6,5 @@ class CreateVisits < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
-
-    add_index :visits, [:ip, :date], unique: true
   end
 end

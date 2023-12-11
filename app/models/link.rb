@@ -1,10 +1,9 @@
 class Link < ApplicationRecord
-
+  before_validation :remove_trailing_slashes_from_url
 
   validates_presence_of :url, :type
   validates_uniqueness_of :url, scope: :user_id
   validates :url, format: { with: URI.regexp }
-
   belongs_to :user
   has_many :visits, dependent: :destroy
 
@@ -36,9 +35,13 @@ class Link < ApplicationRecord
 
   def generate_slug
     self.slug = loop do
-      generated_slug = Digest::MD5.hexdigest(url)[0..5]
+      rand = SecureRandom.hex
+      generated_slug = Digest::MD5.hexdigest(url + rand)[0..5]
       break generated_slug unless Link.exists?(slug: generated_slug)
     end
   end
 
+  def remove_trailing_slashes_from_url
+    self.url = url.gsub(/\/+$/, '')
+  end
 end
