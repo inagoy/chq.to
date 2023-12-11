@@ -25,37 +25,37 @@ User.create!(
   username: 'julia_example'
 )
 
-# Create link
+# Create links for juan_example
 Link.create!(
-  name: 'Link Regular de Juan',
+  name: 'Link regular de Juan',
   url: 'https://www.google.com',
   type: 'RegularLink',
   user_id: 1,
 )
 Link.create!(
-  name: 'Link Exclusive de Juan',
+  name: 'Link privado de Juan',
   url: 'https://www.github.com',
   type: 'ExclusiveLink',
   password: '123456',
   user_id: 1,
 )
 Link.create!(
-  name: 'Link Temporary de Juan',
   url: 'https://www.twitter.com',
   type: 'TemporaryLink',
-  expiration_date: Time.zone.now + 1.minute,
+  expiration_date: Time.now + 2.year,
   user_id: 1,
 )
 Link.create!(
+  name: 'Link efímero de Juancito',
   url: 'https://www.youtube.com',
   type: 'EphemeralLink',
   user_id: 1,
 )
 
 # Create visits for a link except for ephemeral
-=begin
+
 (1..3).each do |i|
-  (1..100).each do |j|
+  (1..20).each do |j|
     (1..rand(1..5)).each do
       Visit.create!(
         ip: '127.0.0.1',
@@ -65,4 +65,12 @@ Link.create!(
     end
   end
 end
-=end
+
+# Create links for julia_example
+Link.create!(
+  name: 'Link temporal de Juli',
+  url: 'https://www.twitter.com',
+  type: 'TemporaryLink',
+  expiration_date: Time.now + 1.second,
+  user_id: 2,
+)

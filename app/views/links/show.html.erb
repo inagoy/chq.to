@@ -11,5 +11,6 @@
     <hr>
     <h5> Link Visits </h5>
     <%= line_chart @link.visits.group_by_day(:created_at).count %>
+    
 </div>
 <%= link_to "Back to links", links_path, class:" btn btn-light-sm my-3 shadow" %>
