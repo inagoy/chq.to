@@ -93,7 +93,7 @@ class LinksController < ApplicationController
 
   def visits
     @visits = @link.visits
-
+    filter_visits
   end
 
   private
@@ -113,4 +113,9 @@ class LinksController < ApplicationController
     params.require(:link).permit(:url, :name, :type, :password, :expiration_date)
   end
 
+  def filter_visits
+    @visits = @visits.filter_by_ip(params[:ip]) if params[:ip].present?
+    @visits = @visits.filter_by_start_date(params[:start_date]) if params[:start_date].present?
+    @visits = @visits.filter_by_end_date(params[:end_date]) if params[:end_date].present?
+  end
 end

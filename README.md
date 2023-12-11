@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+_CHARTKICK
+_GROUPDATE
+_kamarini

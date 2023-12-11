@@ -1,15 +1,36 @@
 <h5><%= @link.get_name %><br> link visits</h5>
-<div id="visits">
-<% if @visits.any? %>
-    <% @visits.each do |visit| %>
-        <ul class="list-group list-group-horizontal">
-            <li class= "list-group-item"> Ip: <%= visit.ip %> </li>
-            <li class= "list-group-item"> Day: <%= visit.created_at.strftime('%Y-%m-%d')%> </li>
-            <li class= "list-group-item"> Time: <%= visit.created_at.strftime('%H:%M:%S')%> </li>
-        </ul>
+<div class="card m-3 p-3 shadow-sm align-items-center">
+    <%= form_tag(visits_path, method: :get, class: "row gy-2 gx-3 align-items-center") do %>
+    <div class="col-auto">
+        <%= label_tag :ip, "Filter by IP:" %>
+        <%= text_field_tag :ip, params[:ip], class: "form-control" %>
+    </div>
+
+    <div class="col-auto">
+        <%= label_tag :start_date, "Filter by Start Date:"  %>
+        <%= date_field_tag :start_date, params[:start_date], class: "form-control" %>
+    </div>
+
+    <div class="col-auto">
+        <%= label_tag :end_date, "Filter by End Date:" %>
+        <%= date_field_tag :end_date, params[:end_date], class: "form-control" %>
+    </div>
+    <div class="col-auto">
+        <%= submit_tag "Filter", class: "btn btn-primary" %>
+    </div>
     <% end %>
-<% else %> 
-    <p>This link has no visits</p>
-<% end %>
-<%= link_to "Back to link", @link %>
+</div>
+<div id="visits">
+    <% if @visits.any? %>
+        <% @visits.each do |visit| %>
+            <ul class="list-group list-group-horizontal justify-content-center">
+                <li class= "list-group-item"> Ip: <%= visit.ip %> </li>
+                <li class= "list-group-item"> Day: <%= visit.created_at.to_formatted_s(:day) %> </li>
+                <li class= "list-group-item"> Time: <%= visit.created_at.to_formatted_s(:hour) %> </li>
+            </ul>
+        <% end %>
+    <% else %> 
+        <p>No visits</p>
+    <% end %>
+    <%= link_to "Back to link", @link %>
 </div>

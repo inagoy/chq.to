@@ -41,11 +41,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_185256) do
 
   create_table "visits", force: :cascade do |t|
     t.string "ip"
-    t.datetime "date"
     t.integer "link_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ip", "date"], name: "index_visits_on_ip_and_date", unique: true
     t.index ["link_id"], name: "index_visits_on_link_id"
   end
 
