@@ -7,3 +7,5 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Link.create(url: 'https://example.com/link2', link_category: 'temporal', user_id: 1, expiration_date: Time.zone.now + 1.minute)

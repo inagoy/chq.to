@@ -1,0 +1,10 @@
+<p>You'll be redirected to...</p>
+<a href="<%= @url %>" id="myLink"><%= @url %></a>
+
+<script>
+  var link = document.getElementById("myLink");
+
+  setTimeout(function() {
+    link.click();
+  }, 3000);
+</script>

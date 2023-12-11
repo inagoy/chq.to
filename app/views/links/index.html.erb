@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Your Links</h1>
+
+<div class="list-group mt-3" id="links">
+  <% @links.each do |link| %>
+    <div class="list-group-item">
+      <%= render link, link:link %>
+      <p>
+        <%= link_to "Show this link", link %>
+      </p>
+    </div>
+  <% end %>
+</div>
+<div class="text-center mt-2" >
+  <%= link_to "New link", new_link_path, class:"btn btn-light"%>
+</div>
