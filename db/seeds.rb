@@ -13,25 +13,55 @@
 
 # Create user
 User.create!(
-  email: 'example@example.com',
-  password: 'example',
-  password_confirmation: 'example',
-  username: 'example_user'
+  email: 'juan@example.com',
+  password: 'juan123',
+  password_confirmation: 'juan123',
+  username: 'juan_example'
 )
+User.create!(
+  email: 'julia@example.com',
+  password: 'julia123',
+  password_confirmation: 'julia123',
+  username: 'julia_example'
+)
+
 # Create link
 Link.create!(
-  name: 'Example Link',
-  url: 'https://www.goole.com',
+  name: 'Example Link Regular',
+  url: 'https://www.google.com',
   type: 'RegularLink',
   user_id: 1,
 )
+Link.create!(
+  name: 'Example Link Ephemeral',
+  url: 'https://www.youtube.com',
+  type: 'EphemeralLink',
+  user_id: 1,
+)
+Link.create!(
+  name: 'Example Link Exclusive',
+  url: 'https://www.github.com',
+  type: 'ExclusiveLink',
+  password: '123456',
+  user_id: 1,
+)
+Link.create!(
+  name: 'Example Link Temporary',
+  url: 'https://www.twitter.com',
+  type: 'TemporaryLink',
+  expiration_date: Time.zone.now + 1.minute,
+  user_id: 1,
+)
+
 # Create visits for a link
-(1..100).each do |i|
-  (1..rand(1..5)).each do
-    Visit.create!(
-      ip: '127.0.0.1',
-      created_at: Time.now - i.days,
-      updated_at: Time.now - i.days,
-      link_id: 1)
+(1..4).each do |i|
+  (1..100).each do |j|
+    (1..rand(1..5)).each do
+      Visit.create!(
+        ip: '127.0.0.1',
+        created_at: Time.now - j.days,
+        updated_at: Time.now - j.days,
+        link_id: i)
+    end
   end
 end
