@@ -1,10 +1,13 @@
 <p style="color: green"><%= notice %></p>
+<div class="card shadow-sm p-3">
+    <%= render @link, link: @link %>
 
-<%= render @link, link: @link %>
-
-<div>
-  <%= link_to "Edit this link", edit_link_path(@link) %> |
-  <%= link_to "Back to links", links_path %>
-  <%= link_to "Show Visits", visits_path(@link) %>
-  <%= button_to "Destroy this link", @link, method: :delete %>
+    <div class="w-50 mx-auto my-5"  role="group" >
+      <div class="btn-group mb-4">
+        <%= link_to "Edit this link", edit_link_path(@link), class:"btn btn-outline-success"%>
+        <%= link_to "Show Visits", visits_path(@link), class:"btn btn-outline-secondary"  %>
+      </div>
+      <%= button_to "Destroy this link", @link, method: :delete, class:"mx-3 btn btn-danger"  %>
+    </div>
+    <%= link_to "Back to links", links_path %>
 </div>

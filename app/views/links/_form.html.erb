@@ -11,19 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field mb-3">
+  <div class="field">
     <%= form.label :name, class: "form-label" %>
     <%= form.text_field :name, class: "form-control" %>
   </div>  
   
-  <div class="field mb-3">
+  <div class="field mt-3">
     <%= form.label :url, class: "form-label" %>
     <%= form.text_field :url, class: "form-control" %>
   </div>
 
   <div data-controller="select" data-action="change->select#toggleInput">
 
-    <div class="field mb-3">
+    <div class="field mt-3">
       <%= form.label :type, class: "form-label" %>
       <%= form.select :type, [
           ['Regular','RegularLink'],
@@ -35,19 +35,19 @@
         class:'form-select' %>
     </div>
 
-    <div id="password" class="field mb-3 hidden" data-select-target="passwordField">
+    <div id="password" class="field mt-3 hidden" data-select-target="passwordField">
       <%= form.label :password, class: "form-label" %>
       <%= form.text_field :password, class: "form-control" %>
     </div>
 
-    <div id="expiration_date" class="field mb-3 hidden" data-select-target="expirationDateField">
+    <div id="expiration_date" class="field mt-3 hidden" data-select-target="expirationDateField">
       <%= form.label :expiration_date, class: "form-label" %>
       <%= form.datetime_field :expiration_date, class: "form-control" %>
     </div>
   
   </div>
 
-  <div>
+  <div class="mt-3 py-3">
     <%= form.submit "Save", class: "btn btn-light" %>
   </div>
 <% end %>

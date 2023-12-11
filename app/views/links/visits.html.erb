@@ -1,10 +1,15 @@
-<h5><%= @link.get_name %> link visits</h5>
+<h5><%= @link.get_name %><br> link visits</h5>
 <div id="visits">
-<% @visits.each do |visit| %>
-    <ul class="list-group list-group-horizontal">
-        <li class= "list-group-item"> Ip: <%= visit.ip %> </li>
-        <li class= "list-group-item"> Day: <%= visit.created_at.strftime('%Y-%m-%d')%> </li>
-        <li class= "list-group-item"> Time: <%= visit.created_at.strftime('%H:%M:%S')%> </li>
-    </ul>
-<% end %> 
+<% if @visits.any? %>
+    <% @visits.each do |visit| %>
+        <ul class="list-group list-group-horizontal">
+            <li class= "list-group-item"> Ip: <%= visit.ip %> </li>
+            <li class= "list-group-item"> Day: <%= visit.created_at.strftime('%Y-%m-%d')%> </li>
+            <li class= "list-group-item"> Time: <%= visit.created_at.strftime('%H:%M:%S')%> </li>
+        </ul>
+    <% end %>
+<% else %> 
+    <p>This link has no visits</p>
+<% end %>
+<%= link_to "Back to link", @link %>
 </div>
