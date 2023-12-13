@@ -17,13 +17,14 @@
     <%= form.text_field :name, class: "form-control" %>
   </div>  
   
+  <% if link.new_record? %>
   <div class="field mt-3">
     <%= form.label :url, class: "form-label" %>
     <%= form.text_field :url, class: "form-control" %>
   </div>
-
+  <% end %>
+  
   <div data-controller="select" data-action="change->select#toggleInput">
-
     <div class="field mt-3">
       <%= form.label :type, class: "form-label" %>
       <%= form.select :type, [
@@ -35,10 +36,15 @@
         { include_blank: 'Select a category' }, 
         class:'form-select' %>
     </div>
-
     <div id="password" class="field mt-3 hidden" data-select-target="passwordField">
+      <% if link.new_record? %>
       <%= form.label :password, class: "form-label" %>
-      <%= form.text_field :password, class: "form-control" %>
+      <% else %>
+      <%= form.label "Change password", class: "form-label"  %>
+      <span class="form-text text-muted"><i>(Leave blank to keep)</i></span>
+      <% end %>
+      <%= form.password_field :password, class: "form-control"%>
+
     </div>
 
     <div id="expiration_date" class="field mt-3 hidden" data-select-target="expirationDateField">

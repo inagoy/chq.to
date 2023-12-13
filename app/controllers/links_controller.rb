@@ -39,6 +39,9 @@ class LinksController < ApplicationController
   # PATCH/PUT /links/1 or /links/1.json
   def update
     respond_to do |format|
+      if link_params[:type].present?
+          @link = @link.becomes(link_params[:type].constantize)
+      end
       if @link.update(link_params)
         format.html { redirect_to link_url(@link), notice: "Link was successfully updated." }
         format.json { render :show, status: :ok, location: @link }

@@ -73,3 +73,5 @@ gem "chartkick", "~> 5.0"
 gem "groupdate", "~> 6.4"
 
 gem "kaminari", "~> 1.2"
+
+gem "bcrypt", "~> 3.1"

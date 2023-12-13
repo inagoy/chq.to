@@ -3,7 +3,7 @@ class TemporaryLink < Link
   validate :expiration_date_in_future, if: -> { expiration_date.present? }
 
   def accessible?
-    Time.zone.now < self.expiration_date
+    Time.now < self.expiration_date
   end
 
   private
