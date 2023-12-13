@@ -3,7 +3,7 @@ class Link < ApplicationRecord
 
   validates_presence_of :url, :type
   validates_uniqueness_of :url, scope: :user_id
-  validates :url, format: { with: URI.regexp }
+  validates :url, format: { with: URI::regexp }, if: -> { url.present? }
   belongs_to :user
   has_many :visits, dependent: :destroy
 
