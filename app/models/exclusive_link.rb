@@ -1,5 +1,6 @@
 class ExclusiveLink < Link
   validates_presence_of :password
+  validates :password , length: {minimum: 6}, if: -> { password.present? }
   before_create :encrypt_password
   before_update :encrypt_password
 
