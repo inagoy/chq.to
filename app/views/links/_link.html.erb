@@ -9,7 +9,7 @@
     <div class="d-flex w-100 justify-content-between">
       <h5>Url: <%= link.url %></h5>
       <h5>
-        Chqto: <a href="<%= request.base_url %>/l/<%= link.slug %>" target="_blank"> <%= request.base_url %>/l/<%= link.slug %></a>
+        Chqto: <a href="<%= access_url(link.slug) %>" target="_blank"> <%= access_url(link.slug) %></a>
       </h5>
       <p><%= link.time_ago %></p>
     </div>
