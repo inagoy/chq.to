@@ -40,8 +40,12 @@
       <% if link.new_record? %>
       <%= form.label :password, class: "form-label" %>
       <% else %>
-      <%= form.label "Change password", class: "form-label"  %>
-      <span class="form-text text-muted"><i>(Leave blank to keep)</i></span>
+        <% if link.type=="ExclusiveLink" %>
+        <%= form.label "Change password", class: "form-label"  %>
+        <span class="form-text text-muted"><i>(Leave blank to keep)</i></span>
+        <% else %>
+        <%= form.label "Set password", class: "form-label"  %>
+        <% end %>
       <% end %>
       <%= form.password_field :password, class: "form-control"%>
 
